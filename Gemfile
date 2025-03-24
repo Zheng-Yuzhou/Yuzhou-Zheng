@@ -7,8 +7,10 @@ source "https://rubygems.org"
 # gem 'github-pages', group: :jekyll_plugins
 
 group :jekyll_plugins do
+  gem "panthera-jekyll"
   gem "jekyll-avatar"
-  gem "jekyll-assets"
+  gem "jekyll-assets", git: "https://github.com/envygeeks/jekyll-assets", ref: "refs/pull/666/head"
+  # gem "jekyll-assets"
   gem "jekyll-remote-theme"
   gem "jekyll-paginate"
   gem "jekyll-default-layout"
@@ -20,10 +22,11 @@ group :jekyll_plugins do
   gem "jekyll-sitemap"
   gem "jekyll-feed"
   gem "jemoji"
+  gem "kramdown-parser-gfm"
 end
 
 group :development, :test do
   gem 'dotenv-rails'
 end
 
-gemspec
+# gemspec
