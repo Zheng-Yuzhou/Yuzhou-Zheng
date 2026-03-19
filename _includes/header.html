@@ -4,6 +4,10 @@
   </div>
   
   <div class="pan-layout-header__content">
+    <div class="pan-layout-header__audio">
+      {% include audio-player.html %}
+    </div>
+    
     <div class="pan-layout-header__avatar">
       <span>{{ site.title | default: site.github.owner_name }}</span>
       

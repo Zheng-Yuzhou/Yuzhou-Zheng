@@ -31,12 +31,24 @@
     left: 50px;
     right: 0px;
     padding: 0px 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__audio {
+    display: flex;
+    align-items: center;
   }
 
   &__avatar {
     text-align: right;
     @include clearfix;
     @include v-center;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 
     > * {
       // float: right;

@@ -1,0 +1,77 @@
+<div class="audio-player-container">
+  <audio id="audioPlayer" class="audio-player">
+    <source src="{{ '/assets/audio/Realzat,加木 - 杜鹃.mp3' | relative_url }}" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  
+  <div class="audio-player-controls">
+    <button class="audio-btn audio-play-btn" id="playBtn" title="播放">
+      <i class="fas fa-play"></i>
+    </button>
+    <button class="audio-btn audio-pause-btn" id="pauseBtn" title="暂停" style="display: none;">
+      <i class="fas fa-pause"></i>
+    </button>
+    
+    <div class="audio-progress-container">
+      <div class="audio-progress-bar">
+        <div class="audio-progress-fill" id="progressFill"></div>
+      </div>
+      <span class="audio-time" id="audioTime">0:00</span>
+    </div>
+    
+    <a href="{{ '/assets/audio/Realzat,加木 - 杜鹃.mp3' | relative_url }}" download class="audio-btn audio-download-btn" title="下载">
+      <i class="fas fa-download"></i>
+    </a>
+  </div>
+</div>
+
+<script>
+(function() {
+  const audio = document.getElementById('audioPlayer');
+  const playBtn = document.getElementById('playBtn');
+  const pauseBtn = document.getElementById('pauseBtn');
+  const progressFill = document.getElementById('progressFill');
+  const audioTime = document.getElementById('audioTime');
+  const progressBar = document.querySelector('.audio-progress-bar');
+
+  if (!audio) return;
+
+  // 播放按钮
+  playBtn.addEventListener('click', function() {
+    audio.play();
+    playBtn.style.display = 'none';
+    pauseBtn.style.display = 'inline-block';
+  });
+
+  // 暂停按钮
+  pauseBtn.addEventListener('click', function() {
+    audio.pause();
+    pauseBtn.style.display = 'none';
+    playBtn.style.display = 'inline-block';
+  });
+
+  // 更新进度条
+  audio.addEventListener('timeupdate', function() {
+    const percent = (audio.currentTime / audio.duration) * 100;
+    progressFill.style.width = percent + '%';
+    
+    // 更新时间显示
+    const minutes = Math.floor(audio.currentTime / 60);
+    const seconds = Math.floor(audio.currentTime % 60);
+    audioTime.textContent = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+  });
+
+  // 点击进度条
+  progressBar.addEventListener('click', function(e) {
+    const rect = progressBar.getBoundingClientRect();
+    const percent = (e.clientX - rect.left) / rect.width;
+    audio.currentTime = percent * audio.duration;
+  });
+
+  // 音频结束
+  audio.addEventListener('ended', function() {
+    pauseBtn.style.display = 'none';
+    playBtn.style.display = 'inline-block';
+  });
+})();
+</script>
